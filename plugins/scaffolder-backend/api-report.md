@@ -62,13 +62,6 @@ export function createCatalogWriteAction(): TemplateAction<any>;
 export function createDebugLogAction(): TemplateAction<any>;
 
 // @public (undocumented)
-export function createFetchCookiecutterAction(options: {
-    reader: UrlReader;
-    integrations: ScmIntegrations;
-    containerRunner: ContainerRunner;
-}): TemplateAction<any>;
-
-// @public (undocumented)
 export function createFetchPlainAction(options: {
     reader: UrlReader;
     integrations: ScmIntegrations;
