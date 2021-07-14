@@ -1,5 +1,13 @@
 # @backstage/techdocs-common
 
+## 0.6.8
+
+### Patch Changes
+
+- ae84b20cf: Revert the upgrade to `fs-extra@10.0.0` as that seemed to have broken all installs inexplicably.
+- Updated dependencies
+  - @backstage/backend-common@0.8.6
+
 ## 0.6.7
 
 ### Patch Changes

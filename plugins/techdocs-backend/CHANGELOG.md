@@ -1,5 +1,17 @@
 # @backstage/plugin-techdocs-backend
 
+## 0.8.7
+
+### Patch Changes
+
+- 35a67722b: It is no longer required to provide a generator and a preparer to the TechDocs
+  router factory when running TechDocs in the "recommended" (e.g. externally
+  prepared and generated docs) configuration.
+- ae84b20cf: Revert the upgrade to `fs-extra@10.0.0` as that seemed to have broken all installs inexplicably.
+- Updated dependencies
+  - @backstage/backend-common@0.8.6
+  - @backstage/techdocs-common@0.6.8
+
 ## 0.8.6
 
 ### Patch Changes

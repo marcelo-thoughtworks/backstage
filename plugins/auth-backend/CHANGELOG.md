@@ -1,5 +1,14 @@
 # @backstage/plugin-auth-backend
 
+## 0.3.17
+
+### Patch Changes
+
+- f55f9df10: Add Sign In and Handler resolver for Microsoft provider
+- ae84b20cf: Revert the upgrade to `fs-extra@10.0.0` as that seemed to have broken all installs inexplicably.
+- Updated dependencies
+  - @backstage/backend-common@0.8.6
+
 ## 0.3.16
 
 ### Patch Changes
