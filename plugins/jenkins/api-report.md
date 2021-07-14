@@ -12,11 +12,15 @@ import { Entity } from '@backstage/catalog-model';
 import { InfoCardVariants } from '@backstage/core-components';
 import { RouteRef } from '@backstage/core-plugin-api';
 
+// Warning: (ae-missing-release-tag) "EntityJenkinsContent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const EntityJenkinsContent: (_props: {
   entity?: Entity | undefined;
 }) => JSX.Element;
 
+// Warning: (ae-missing-release-tag) "EntityLatestJenkinsRunCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const EntityLatestJenkinsRunCard: ({
   branch,
@@ -26,16 +30,23 @@ export const EntityLatestJenkinsRunCard: ({
   variant?: InfoCardVariants | undefined;
 }) => JSX.Element;
 
+// Warning: (ae-missing-release-tag) "isJenkinsAvailable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 const isJenkinsAvailable: (entity: Entity) => boolean;
 export { isJenkinsAvailable };
 export { isJenkinsAvailable as isPluginApplicableToEntity };
 
+// Warning: (ae-missing-release-tag) "JENKINS_ANNOTATION" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const JENKINS_ANNOTATION = 'jenkins.io/github-folder';
 
+// Warning: (ae-missing-release-tag) "JenkinsApi" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export class JenkinsApi {
+  // Warning: (ae-forgotten-export) The symbol "Options" needs to be exported by the entry point index.d.ts
   constructor(options: Options);
   // (undocumented)
   extractJobDetailsFromBuildName(
@@ -48,6 +59,8 @@ export class JenkinsApi {
   extractScmDetailsFromJob(jobDetails: any): any | undefined;
   // (undocumented)
   getBuild(buildName: string): Promise<any>;
+  // Warning: (ae-forgotten-export) The symbol "CITableBuildInfo" needs to be exported by the entry point index.d.ts
+  //
   // (undocumented)
   getFolder(folderName: string): Promise<CITableBuildInfo[]>;
   // (undocumented)
@@ -63,9 +76,13 @@ export class JenkinsApi {
   retry(buildName: string): Promise<any>;
 }
 
+// Warning: (ae-missing-release-tag) "jenkinsApiRef" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const jenkinsApiRef: ApiRef<JenkinsApi>;
 
+// Warning: (ae-missing-release-tag) "jenkinsPlugin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 const jenkinsPlugin: BackstagePlugin<
   {
@@ -76,6 +93,8 @@ const jenkinsPlugin: BackstagePlugin<
 export { jenkinsPlugin };
 export { jenkinsPlugin as plugin };
 
+// Warning: (ae-missing-release-tag) "LatestRunCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const LatestRunCard: ({
   branch,
@@ -85,6 +104,9 @@ export const LatestRunCard: ({
   variant?: InfoCardVariants | undefined;
 }) => JSX.Element;
 
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "Router" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
 // @public (undocumented)
 export const Router: (_props: Props) => JSX.Element;
 
