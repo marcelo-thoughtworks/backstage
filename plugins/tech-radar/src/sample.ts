@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import * as dotenv from 'dotenv';
+
 import {
   RadarRing,
   RadarQuadrant,
@@ -22,153 +24,96 @@ import {
   TechRadarApi,
 } from './api';
 
+import axios from 'axios';
+
+const blipsSheet = '';
+const ringSheet = '';
+const quadrantSheet = '';
+
 const rings = new Array<RadarRing>();
-rings.push({ id: 'use', name: 'USE', color: '#93c47d' });
-rings.push({ id: 'trial', name: 'TRIAL', color: '#93d2c2' });
-rings.push({ id: 'assess', name: 'ASSESS', color: '#fbdb84' });
-rings.push({ id: 'hold', name: 'HOLD', color: '#efafa9' });
 
 const quadrants = new Array<RadarQuadrant>();
-quadrants.push({ id: 'infrastructure', name: 'Infrastructure' });
-quadrants.push({ id: 'frameworks', name: 'Frameworks' });
-quadrants.push({ id: 'languages', name: 'Languages' });
-quadrants.push({ id: 'process', name: 'Process' });
 
 const entries = new Array<RadarEntry>();
-entries.push({
-  timeline: [
-    {
-      moved: 0,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-    },
-  ],
-  url: '#',
-  key: 'javascript',
-  id: 'javascript',
-  title: 'JavaScript',
-  quadrant: 'languages',
-  description:
-    'Excepteur **sint** occaecat *cupidatat* non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-});
-entries.push({
-  timeline: [
-    {
-      moved: -1,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-      description:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-    },
-  ],
-  url: '#',
-  key: 'typescript',
-  id: 'typescript',
-  title: 'TypeScript',
-  quadrant: 'languages',
-  description:
-    'Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat',
-});
-entries.push({
-  timeline: [
-    {
-      moved: 1,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-      description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
-    },
-  ],
-  url: 'https://webpack.js.org/',
-  key: 'webpack',
-  id: 'webpack',
-  title: 'Webpack',
-  quadrant: 'frameworks',
-});
-entries.push({
-  timeline: [
-    {
-      moved: 0,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: 'https://reactjs.org/',
-  key: 'react',
-  id: 'react',
-  title: 'React',
-  quadrant: 'frameworks',
-});
-entries.push({
-  timeline: [
-    {
-      moved: 0,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: '#',
-  key: 'code-reviews',
-  id: 'code-reviews',
-  title: 'Code Reviews',
-  quadrant: 'process',
-});
-entries.push({
-  timeline: [
-    {
-      moved: 0,
-      ringId: 'assess',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: '#',
-  key: 'mob-programming',
-  id: 'mob-programming',
-  title: 'Mob Programming',
-  quadrant: 'process',
-});
-entries.push({
-  timeline: [
-    {
-      moved: 0,
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: '#',
-  key: 'docs-like-code',
-  id: 'docs-like-code',
-  title: 'Docs-like-code',
-  quadrant: 'process',
-});
-entries.push({
-  timeline: [
-    {
-      ringId: 'hold',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: '#',
-  key: 'force-push',
-  id: 'force-push',
-  title: 'Force push to master',
-  quadrant: 'process',
-});
-entries.push({
-  timeline: [
-    {
-      ringId: 'use',
-      date: new Date('2020-08-06'),
-    },
-  ],
-  url: '#',
-  key: 'github-actions',
-  id: 'github-actions',
-  title: 'GitHub Actions',
-  quadrant: 'infrastructure',
-});
+
+const loadRings = async (): Promise<any> => {
+  const { data } = await axios.get(ringSheet);
+  const separated = data.split('\n');
+
+  const firstRing = getElementSpecs(separated[1]);
+  const secondRing = getElementSpecs(separated[2]);
+  const thirdRing = getElementSpecs(separated[3]);
+  const fourthRing = getElementSpecs(separated[4]);
+
+  rings.push({ id: firstRing.id, name: firstRing.title, color: '#93c47d' });
+  rings.push({ id: secondRing.id, name: secondRing.title, color: '#93d2c2' });
+  rings.push({ id: thirdRing.id, name: thirdRing.title, color: '#fbdb84' });
+  rings.push({ id: fourthRing.id, name: fourthRing.title, color: '#efafa9' });
+
+  return new Promise(resolve => {
+    resolve(rings);
+  });
+};
+
+const loadQuadrants = async (): Promise<any> => {
+  const { data } = await axios.get(quadrantSheet);
+  const separated = data.split('\n');
+
+  const firstQuadrants = getElementSpecs(separated[1]);
+  const secondQuadrants = getElementSpecs(separated[2]);
+  const thirdQuadrants = getElementSpecs(separated[3]);
+  const fourthQuadrants = getElementSpecs(separated[4]);
+
+  quadrants.push({ id: firstQuadrants.id, name: firstQuadrants.title });
+  quadrants.push({ id: secondQuadrants.id, name: secondQuadrants.title });
+  quadrants.push({ id: thirdQuadrants.id, name: thirdQuadrants.title });
+  quadrants.push({ id: fourthQuadrants.id, name: fourthQuadrants.title });
+
+  return new Promise(resolve => {
+    resolve(quadrants);
+  });
+};
+
+const loadEntries = async (): Promise<any> => {
+  const { data } = await axios.get(blipsSheet);
+  const separated = data.split('\n');
+  separated.shift();
+  for (const blipRaw of separated) {
+    const blipArray = blipRaw.split(',');
+    const blip = {
+      title: blipArray[0],
+      id: blipArray[1],
+      quadrant: blipArray[2],
+      ring: blipArray[3],
+      description: blipArray[4],
+    };
+    if (!blip.quadrant) {
+      continue;
+    }
+
+    const blipEntry = {
+      timeline: [
+        {
+          moved: 0,
+          ringId: blip.ring,
+          date: new Date('2020-08-06'),
+          description: blip.description,
+        },
+      ],
+      url: '#',
+      key: blip.id,
+      id: blip.id,
+      title: blip.title,
+      quadrant: blip.quadrant,
+      description: blip.description,
+    };
+    entries.push(blipEntry);
+  }
+
+  return new Promise(resolve => {
+    resolve(entries);
+  });
+};
 
 export const mock: TechRadarLoaderResponse = {
   entries,
@@ -178,6 +123,17 @@ export const mock: TechRadarLoaderResponse = {
 
 export class SampleTechRadarApi implements TechRadarApi {
   async load() {
+    await loadRings();
+    await loadQuadrants();
+    await loadEntries();
+
     return mock;
   }
+}
+function getElementSpecs(separated: any) {
+  const sparetedContent = separated.split(',');
+  return {
+    id: sparetedContent[1].replace('\r', ''),
+    title: sparetedContent[0],
+  };
 }
