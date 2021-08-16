@@ -24,11 +24,6 @@ import {
   TechRadarApi,
 } from './api';
 
-import axios from 'axios';
-
-const blipsSheet = '';
-const ringSheet = '';
-const quadrantSheet = '';
 
 const rings = new Array<RadarRing>();
 
@@ -37,18 +32,11 @@ const quadrants = new Array<RadarQuadrant>();
 const entries = new Array<RadarEntry>();
 
 const loadRings = async (): Promise<any> => {
-  const { data } = await axios.get(ringSheet);
-  const separated = data.split('\n');
 
-  const firstRing = getElementSpecs(separated[1]);
-  const secondRing = getElementSpecs(separated[2]);
-  const thirdRing = getElementSpecs(separated[3]);
-  const fourthRing = getElementSpecs(separated[4]);
-
-  rings.push({ id: firstRing.id, name: firstRing.title, color: '#93c47d' });
-  rings.push({ id: secondRing.id, name: secondRing.title, color: '#93d2c2' });
-  rings.push({ id: thirdRing.id, name: thirdRing.title, color: '#fbdb84' });
-  rings.push({ id: fourthRing.id, name: fourthRing.title, color: '#efafa9' });
+  rings.push({ id: 'evite', name: 'Evite', color: '#93c47d' });
+  rings.push({ id: 'experimente', name: 'Experimente', color: '#93d2c2' });
+  rings.push({ id: 'adote', name: 'Adote', color: '#fbdb84' });
+  rings.push({ id: 'avalie', name: 'Avalie', color: '#efafa9' });
 
   return new Promise(resolve => {
     resolve(rings);
@@ -56,18 +44,11 @@ const loadRings = async (): Promise<any> => {
 };
 
 const loadQuadrants = async (): Promise<any> => {
-  const { data } = await axios.get(quadrantSheet);
-  const separated = data.split('\n');
 
-  const firstQuadrants = getElementSpecs(separated[1]);
-  const secondQuadrants = getElementSpecs(separated[2]);
-  const thirdQuadrants = getElementSpecs(separated[3]);
-  const fourthQuadrants = getElementSpecs(separated[4]);
-
-  quadrants.push({ id: firstQuadrants.id, name: firstQuadrants.title });
-  quadrants.push({ id: secondQuadrants.id, name: secondQuadrants.title });
-  quadrants.push({ id: thirdQuadrants.id, name: thirdQuadrants.title });
-  quadrants.push({ id: fourthQuadrants.id, name: fourthQuadrants.title });
+  quadrants.push({ id: 'linguagens-de-programacao-e-frameworks', name: 'Linguagens de Programação e Frameworks' });
+  quadrants.push({ id: 'ferramentas', name: 'Ferramentas' });
+  quadrants.push({ id: 'tecnicas', name: 'Técnicas' });
+  quadrants.push({ id: 'plataformas', name: 'Plataformas' });
 
   return new Promise(resolve => {
     resolve(quadrants);
@@ -75,9 +56,9 @@ const loadQuadrants = async (): Promise<any> => {
 };
 
 const loadEntries = async (): Promise<any> => {
-  const { data } = await axios.get(blipsSheet);
+  const data = 'Django,django,linguagens-de-programacao-e-frameworks,evite,Framework para desenvolvimento python \n Flyway,flyway,ferramentas,experimente,Ferramenta de automação de migrações de banco de dados. '
   const separated = data.split('\n');
-  separated.shift();
+  console.log('TESTE', separated)
   for (const blipRaw of separated) {
     const blipArray = blipRaw.split(',');
     const blip = {
@@ -130,10 +111,4 @@ export class SampleTechRadarApi implements TechRadarApi {
     return mock;
   }
 }
-function getElementSpecs(separated: any) {
-  const sparetedContent = separated.split(',');
-  return {
-    id: sparetedContent[1].replace('\r', ''),
-    title: sparetedContent[0],
-  };
-}
+  
